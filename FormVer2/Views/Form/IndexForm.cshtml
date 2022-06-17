@@ -5,7 +5,7 @@
     ViewData["Title"] = "Form";
 }
 
-<div class="tab-content" id="nav-tabContent">
+@*<div>
     <div style="padding:1rem;">
         <button type="button" class="btn btn-primary">
             <a asp-action="CreateForm" style="color:white;">Add Form</a>
@@ -75,4 +75,55 @@
             </tbody>
         </table>
     </div>
+</div>*@
+
+<div class="card">
+    <div class="card-header border-transparent">
+        <h3 class="card-title">Latest Orders</h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table m-0">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Width</th>
+                        <th>Height</th>
+                        <th>Published</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <a>@Html.DisplayFor(modelItem => item.Title)</a>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ShortDescription)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Width)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Height)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Published)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- /.table-responsive -->
+    </div>
+    <!-- /.card-body -->
+    <div class="card-footer clearfix">
+        <a href="javascript:void(0)" class="btn btn-sm btn-info float-left">Place New Order</a>
+        <a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">View All Orders</a>
+    </div>
+    <!-- /.card-footer -->
 </div>
