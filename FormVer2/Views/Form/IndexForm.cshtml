@@ -5,78 +5,6 @@
     ViewData["Title"] = "Form";
 }
 
-@*<div>
-    <div style="padding:1rem;">
-        <button type="button" class="btn btn-primary">
-            <a asp-action="CreateForm" style="color:white;">Add Form</a>
-        </button>
-    </div>
-    <div style="padding:1rem;">
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>
-                        Title
-                    </th>
-                    <th>
-                        Description
-                    </th>
-                    <th>
-                        Width
-                    </th>
-                    <th>
-                        Height
-                    </th>
-                    <th>
-                        Published
-                    </th>
-                    <th>
-                        Action
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            <a class="btn">
-                                @Html.DisplayFor(modelItem => item.Title)
-                            </a>
-                        </td>
-                        <td>
-                            <a class="btn">
-                                @Html.DisplayFor(modelItem => item.ShortDescription)
-                            </a>
-                        </td>
-                        <td>
-                            <a class="btn">
-                                @Html.DisplayFor(modelItem => item.Width)
-                            </a>
-                        </td>
-                        <td>
-                            <a class="btn">
-                                @Html.DisplayFor(modelItem => item.Height)
-                            </a>
-                        </td>
-                        <td>
-                            <a class="btn">
-                                @Html.DisplayFor(modelItem => item.Published)
-                            </a>
-                        </td>
-                        <td>
-                            <a asp-route-id="@item.Id" asp-action="UpdateForm" class="btn btn-primary">Edit</a>
-                            <a asp-route-id="@item.Id" asp-action="DeleteForm" class="btn btn-primary">Delete</a>
-                            <a asp-controller="FormComponent" asp-action="IndexFormComponent" asp-route-formId="@item.Id" class="btn btn-primary">Component</a>
-                            <a asp-controller="Preview" asp-action="IndexPreview" asp-route-formId="@item.Id" class="btn btn-primary">Preview</a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-</div>*@
-
 <div class="card">
     <div class="card-header border-transparent">
         <h3 class="card-title">Form Overview</h3>
@@ -91,7 +19,7 @@
                         <th>Description</th>
                         <th>Width</th>
                         <th>Height</th>
-                        <th>Action</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
