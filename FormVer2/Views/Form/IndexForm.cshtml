@@ -98,21 +98,21 @@
                     @foreach (var item in Model)
                     {
                         <tr>
-                            <td>
+                            <td width="12%">
                                 <a asp-route-id="@item.Id" asp-action="UpdateForm">
                                     @Html.DisplayFor(modelItem => item.Title)
                                 </a>
                             </td>
-                            <td>
+                            <td width="30%">
                                 @Html.DisplayFor(modelItem => item.ShortDescription)
                             </td>
-                            <td>
+                            <td width="10%">
                                 @Html.DisplayFor(modelItem => item.Width)
                             </td>
-                            <td>
+                            <td width="10%">
                                 @Html.DisplayFor(modelItem => item.Height)
                             </td>
-                            <td>
+                            <td width="38%">
                                 <a asp-route-id="@item.Id" asp-action="UpdateForm" class="btn btn-primary">Edit</a>
                                 <a asp-route-id="@item.Id" asp-action="DeleteForm" class="btn btn-primary">Delete</a>
                                 <a asp-controller="FormComponent" asp-action="IndexFormComponent" asp-route-formId="@item.Id" class="btn btn-primary">Component</a>
