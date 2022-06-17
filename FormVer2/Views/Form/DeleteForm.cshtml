@@ -1,0 +1,29 @@
+@using FormVer2.Models.BL.FormBL
+@model FormDTO
+@{
+    ViewData["Title"] = "Delete form";
+}
+
+<div class="tab-content" id="nav-tabContent">
+    <div style="padding: 1rem">
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="DeleteConfirmed">
+                    <div class="form-group">
+                        <label asp-for="Title" class="control-label"></label>
+                        <input asp-for="Title" class="form-control" readonly />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ShortDescription" class="control-label"></label>
+                        <input asp-for="ShortDescription" class="form-control" readonly />
+                    </div>
+                    <div class="form-group">
+                        @Html.HiddenFor(modelItem => Model.Id)
+                        <input type="submit" value="Delete" class="btn btn-primary" />
+                        <a asp-action="IndexForm" class="btn btn-success">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

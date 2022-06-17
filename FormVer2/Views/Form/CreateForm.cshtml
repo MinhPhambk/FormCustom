@@ -1,0 +1,36 @@
+@using FormVer2.Models.BL.FormBL
+@model FormDTO
+@{
+    ViewData["Title"] = "Create form";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateForm">
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="ShortDescription" class="control-label"></label>
+                <input asp-for="ShortDescription" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Width" class="control-label"></label>
+                <input asp-for="Width" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Height" class="control-label"></label>
+                <input asp-for="Height" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Published" class="control-label"></label>
+                <input asp-for="Published" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                <a asp-action="IndexForm" class="btn btn-success">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>

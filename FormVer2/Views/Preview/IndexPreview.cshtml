@@ -1,0 +1,25 @@
+@using FormVer2.Models.BL.PreviewBL
+@using FormVer2.Models.BL.ItemBL
+
+@model PreviewFormDTO
+
+@{
+    ViewData["Title"] = "Preview";
+}
+
+<div class="tab-content" id="nav-tabContent">
+    <div style="padding:1rem;">
+        @foreach (var c in Model.ListComponent)
+        {
+            var str = "_" + c.Name;
+            if (c.ContainValue)
+            {
+                Html.RenderPartial(str, c);
+            }
+            else
+            {
+                Html.RenderPartial(str, c.Alias);
+            }
+        }
+    </div>
+</div>

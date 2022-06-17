@@ -1,0 +1,70 @@
+@using FormVer2.Models.BL.FormComponentBL
+
+@model ViewFormComponentDTO
+
+@{
+    ViewData["Title"] = "Form's Component";
+}
+
+<div class="tab-content" id="nav-tabContent">
+    <div style="padding:1rem;">
+        <button type="button" class="btn btn-primary">
+            <a asp-action="CreateFormComponent" asp-route-formId="@Model.FormId" style="color:white;">Add Form's Component'</a>
+        </button>
+    </div>
+    <div style="padding:1rem;">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        ComponentId
+                    </th>
+                    <th>
+                        TextPrompt
+                    </th>
+                    <th>
+                        IsRequired
+                    </th>
+                    <th>
+                        DisplayOrder
+                    </th>
+                    <th>
+                        Action
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.ListFormComponent)
+                {
+                <tr>
+                    <td>
+                        <a class="btn">
+                            @Html.DisplayFor(modelItem => item.ComponentId)
+                        </a>
+                    </td>
+                    <td>
+                        <a class="btn">
+                            @Html.DisplayFor(modelItem => item.TextPrompt)
+                        </a>
+                    </td>
+                    <td>
+                        <a class="btn">
+                            @Html.DisplayFor(modelItem => item.IsRequired)
+                        </a>
+                    </td>
+                    <td>
+                        <a class="btn">
+                            @Html.DisplayFor(modelItem => item.DisplayOrder)
+                        </a>
+                    </td>
+                    <td>
+                        <a asp-route-id="@item.Id" asp-action="UpdateFormComponent" class="btn btn-primary">Edit</a>
+                        <a asp-route-id="@item.Id" asp-action="DeleteFormComponent" class="btn btn-primary">Delete</a>
+                        <a asp-controller="Item" asp-action="IndexItem" asp-route-formId="@item.FormId" asp-route-componentId="@item.Id" class="btn btn-primary">Item</a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

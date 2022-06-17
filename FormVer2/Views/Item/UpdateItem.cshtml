@@ -1,0 +1,39 @@
+@using FormVer2.Models.BL.ItemBL
+@model ItemDTO
+@{
+    ViewData["Title"] = "Item details";
+}
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="UpdateItem">
+            <div class="form-group">
+                <label asp-for="Id" class="control-label"></label>
+                <input asp-for="Id" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="FormId" class="control-label"></label>
+                <input asp-for="FormId" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="ComponentId" class="control-label"></label>
+                <input asp-for="ComponentId" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Alias" class="control-label"></label>
+                <input asp-for="Alias" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="IsPreSelected" class="control-label"></label>
+                <input asp-for="IsPreSelected" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="DisplayOrder" class="control-label"></label>
+                <input asp-for="DisplayOrder" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save changes" class="btn btn-primary" />
+                <a asp-controller="Item" asp-action="IndexItem" asp-route-formId="@Model.FormId" asp-route-componentId="@Model.ComponentId" class="btn btn-success">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>

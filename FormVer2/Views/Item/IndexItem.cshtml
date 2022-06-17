@@ -1,0 +1,77 @@
+@using FormVer2.Models.BL.ItemBL
+
+@model ViewItemDTO
+
+@{
+    ViewData["Title"] = "Item";
+}
+
+<div class="tab-content" id="nav-tabContent">
+    <div style="padding:1rem;">
+        <button type="button" class="btn btn-primary">
+            <a asp-action="CreateItem" asp-route-formId="@Model.FormId" asp-route-componentId="@Model.ComponentId" style="color:white;">Add Item</a>
+        </button>
+    </div>
+    <div style="padding:1rem;">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        FormId
+                    </th>
+                    <th>
+                        ComponentId
+                    </th>
+                    <th>
+                        Alias
+                    </th>
+                    <th>
+                        IsPreSelected
+                    </th>
+                    <th>
+                        DisplayOrder
+                    </th>
+                    <th>
+                        Action
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.ListItem)
+                {
+                <tr>
+                    <td>
+                        <a class="btn">
+                            @Html.DisplayFor(modelItem => item.FormId)
+                        </a>
+                    </td>
+                    <td>
+                        <a class="btn">
+                            @Html.DisplayFor(modelItem => item.ComponentId)
+                        </a>
+                    </td>
+                    <td>
+                        <a class="btn">
+                            @Html.DisplayFor(modelItem => item.Alias)
+                        </a>
+                    </td>
+                    <td>
+                        <a class="btn">
+                            @Html.DisplayFor(modelItem => item.IsPreSelected)
+                        </a>
+                    </td>
+                    <td>
+                        <a class="btn">
+                            @Html.DisplayFor(modelItem => item.DisplayOrder)
+                        </a>
+                    </td>
+                    <td>
+                        <a asp-route-id="@item.Id" asp-action="UpdateItem" class="btn btn-primary">Edit</a>
+                        <a asp-route-id="@item.Id" asp-action="DeleteItem" class="btn btn-primary">Delete</a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
