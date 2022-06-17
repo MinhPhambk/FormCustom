@@ -1,6 +1,6 @@
 using FormVer2.Models.BL.FormBL;
 using FormVer2.Models.BL.ComponentBL;
-//using FormVer2.Models.DL;
+using FormVer2.Models.DL;
 using FormVer2.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -62,7 +62,7 @@ namespace FormVer2.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdateForm([Bind("Id,Title,ShortDescription,Width,Height,Published")] FormDTO form)
+        public async Task<IActionResult> UpdateForm([Bind("Id,Title,ShortDescription,Width,Height")] FormDTO form)
         {
             try
             {

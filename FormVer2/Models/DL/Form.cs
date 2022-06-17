@@ -18,7 +18,6 @@ namespace FormVer2.Models.DL
         public string ShortDescription { get; set; }
         public decimal Width { get; set; }
         public decimal Height { get; set; }
-        public bool Published { get; set; }
 
         public virtual ICollection<FormComponent> FormComponents { get; set; }
         public virtual ICollection<Item> Items { get; set; }

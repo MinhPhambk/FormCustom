@@ -79,7 +79,7 @@
 
 <div class="card">
     <div class="card-header border-transparent">
-        <h3 class="card-title">Latest Orders</h3>
+        <h3 class="card-title">Form Overview</h3>
     </div>
     <!-- /.card-header -->
     <div class="card-body p-0">
@@ -91,7 +91,7 @@
                         <th>Description</th>
                         <th>Width</th>
                         <th>Height</th>
-                        <th>Published</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -99,7 +99,9 @@
                     {
                         <tr>
                             <td>
-                                <a>@Html.DisplayFor(modelItem => item.Title)</a>
+                                <a asp-route-id="@item.Id" asp-action="UpdateForm">
+                                    @Html.DisplayFor(modelItem => item.Title)
+                                </a>
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.ShortDescription)
@@ -111,7 +113,10 @@
                                 @Html.DisplayFor(modelItem => item.Height)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Published)
+                                <a asp-route-id="@item.Id" asp-action="UpdateForm" class="btn btn-primary">Edit</a>
+                                <a asp-route-id="@item.Id" asp-action="DeleteForm" class="btn btn-primary">Delete</a>
+                                <a asp-controller="FormComponent" asp-action="IndexFormComponent" asp-route-formId="@item.Id" class="btn btn-primary">Component</a>
+                                <a asp-controller="Preview" asp-action="IndexPreview" asp-route-formId="@item.Id" class="btn btn-primary">Preview</a>
                             </td>
                         </tr>
                     }
@@ -120,10 +125,4 @@
         </div>
         <!-- /.table-responsive -->
     </div>
-    <!-- /.card-body -->
-    <div class="card-footer clearfix">
-        <a href="javascript:void(0)" class="btn btn-sm btn-info float-left">Place New Order</a>
-        <a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">View All Orders</a>
-    </div>
-    <!-- /.card-footer -->
 </div>

@@ -33,7 +33,6 @@ namespace FormVer2.Models.BL.PreviewBL
             formPreview.ShortDescription = form.ShortDescription;
             formPreview.Width = form.Width;
             formPreview.Height = form.Height;
-            formPreview.Published = form.Published;
             formPreview.ListComponent = new List<PreviewComponentDTO>();
 
             List<Item> lstItem = new List<Item>();

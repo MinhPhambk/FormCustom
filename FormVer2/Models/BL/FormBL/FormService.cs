@@ -31,7 +31,6 @@ namespace FormVer2.Models.BL.FormBL
                 formModel.ShortDescription = form.ShortDescription;
                 formModel.Width = form.Width;
                 formModel.Height = form.Height;
-                formModel.Published = form.Published;
                 dbContext.Forms.Add(formModel);
                 await dbContext.SaveChangesAsync();
             }
@@ -53,7 +52,6 @@ namespace FormVer2.Models.BL.FormBL
                 formModel.ShortDescription = form.ShortDescription;
                 formModel.Width = form.Width;
                 formModel.Height = form.Height;
-                formModel.Published = form.Published;
                 dbContext.Forms.Update(formModel);
                 await dbContext.SaveChangesAsync();
             }
@@ -102,7 +100,7 @@ namespace FormVer2.Models.BL.FormBL
             FormDTO formDTO = new FormDTO();
             if (formModel != null)
             {
-                formDTO = new FormDTO(formModel.Id, formModel.Title, formModel.ShortDescription, formModel.Width, formModel.Height, formModel.Published);
+                formDTO = new FormDTO(formModel.Id, formModel.Title, formModel.ShortDescription, formModel.Width, formModel.Height);
             }
             return formDTO;
         }
@@ -115,7 +113,7 @@ namespace FormVer2.Models.BL.FormBL
             {
                 foreach (Form form in lst)
                 {
-                    lstDTO.Add(new FormDTO(form.Id, form.Title, form.ShortDescription, form.Width, form.Height, form.Published));
+                    lstDTO.Add(new FormDTO(form.Id, form.Title, form.ShortDescription, form.Width, form.Height));
                 }
             }
                 
