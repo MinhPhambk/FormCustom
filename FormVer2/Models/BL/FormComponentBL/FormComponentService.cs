@@ -19,6 +19,22 @@ namespace FormVer2.Models.BL.FormComponentBL
             dbContext = appDbContext;
         }
 
+        public async Task<List<FormComponentDTO>> GetList()
+        {
+            List<FormComponent> lst = await dbContext.FormComponents.ToListAsync();
+            List<FormComponentDTO> lstDTO = new List<FormComponentDTO>();
+
+            if (lst != null)
+            {
+                foreach (FormComponent fc in lst)
+                {
+                    lstDTO.Add(new FormComponentDTO(fc.Id, fc.FormId, fc.ComponentId, fc.TextPrompt, fc.IsRequired, fc.DisplayOrder));
+                }
+            }
+
+            return lstDTO;
+        }
+
         public async Task<string> CreateAsync(FormComponentDTO formComponent)
         {
 

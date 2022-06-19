@@ -1,5 +1,5 @@
 @using FormVer2.Models.BL.FormBL
-@model List<FormDTO>
+@model List<ViewFormDTO>
 
 @{
     ViewData["Title"] = "Form";
@@ -27,24 +27,24 @@
                     {
                         <tr>
                             <td width="12%">
-                                <a asp-route-id="@item.Id" asp-action="UpdateForm">
-                                    @Html.DisplayFor(modelItem => item.Title)
+                                <a asp-route-id="@item.Form.Id" asp-action="UpdateForm">
+                                    @Html.DisplayFor(modelItem => item.Form.Title)
                                 </a>
                             </td>
                             <td width="30%">
-                                @Html.DisplayFor(modelItem => item.ShortDescription)
+                                @Html.DisplayFor(modelItem => item.Form.ShortDescription)
                             </td>
-                            <td width="10%">
-                                @Html.DisplayFor(modelItem => item.Width)
+                            <td width="9%">
+                                @Html.DisplayFor(modelItem => item.Form.Width)
                             </td>
-                            <td width="10%">
-                                @Html.DisplayFor(modelItem => item.Height)
+                            <td width="9%">
+                                @Html.DisplayFor(modelItem => item.Form.Height)
                             </td>
-                            <td width="38%">
-                                <a asp-route-id="@item.Id" asp-action="UpdateForm" class="btn btn-primary">Edit</a>
-                                <a asp-route-id="@item.Id" asp-action="DeleteForm" class="btn btn-primary">Delete</a>
-                                <a asp-controller="FormComponent" asp-action="IndexFormComponent" asp-route-formId="@item.Id" class="btn btn-primary">Component</a>
-                                <a asp-controller="Preview" asp-action="IndexPreview" asp-route-formId="@item.Id" class="btn btn-primary">Preview</a>
+                            <td width="40%">
+                                <a asp-route-id="@item.Form.Id" asp-action="UpdateForm" class="btn btn-primary">Edit</a>
+                                <a asp-route-id="@item.Form.Id" asp-action="DeleteForm" class="btn btn-primary">Delete</a>
+                                <a asp-controller="FormComponent" asp-action="IndexFormComponent" asp-route-formId="@item.Form.Id" class="btn btn-primary">Component (@item.NumOfCo)</a>
+                                <a asp-controller="Preview" asp-action="IndexPreview" asp-route-formId="@item.Form.Id" class="btn btn-primary">Preview</a>
                             </td>
                         </tr>
                     }

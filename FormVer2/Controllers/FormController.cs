@@ -1,5 +1,6 @@
 using FormVer2.Models.BL.FormBL;
 using FormVer2.Models.BL.ComponentBL;
+using FormVer2.Models.BL.FormComponentBL;
 using FormVer2.Models.DL;
 using FormVer2.Models;
 using Microsoft.AspNetCore.Http;
@@ -18,10 +19,12 @@ namespace FormVer2.Controllers
     public class FormController : Controller
     {
         private readonly IFormService _formService;
+        private readonly IFormComponentService _formComponentService;
 
-        public FormController(IFormService formService)
+        public FormController(IFormService formService, IFormComponentService formComponentService)
         {
             _formService = formService;
+            _formComponentService = formComponentService;
         }
 
         [HttpGet]
@@ -33,7 +36,21 @@ namespace FormVer2.Controllers
         [HttpGet]
         public async Task<IActionResult> IndexForm()
         {
-            List<FormDTO> model = await _formService.GetForms();
+            List<FormDTO> ListForm = await _formService.GetForms();
+            List<FormComponentDTO> ListFormCo = await _formComponentService.GetList();
+            List<ViewFormDTO> model = new List<ViewFormDTO>();
+            foreach(var f in ListForm)
+            {
+                ViewFormDTO view = new ViewFormDTO();
+                view.Form = f;
+                int num = 0;
+                foreach(var fc in ListFormCo)
+                {
+                    if (fc.FormId == f.Id) num++;
+                }
+                view.NumOfCo = num;
+                model.Add(view);
+            }
             return View(model);
         }
 
