@@ -5,52 +5,93 @@
     ViewData["Title"] = "Form";
 }
 
-<div class="card">
-    <div class="card-header border-transparent">
-        <h3 class="card-title">Form Overview</h3>
-    </div>
-    <!-- /.card-header -->
-    <div class="card-body p-0">
-        <div class="table-responsive">
-            <table class="table m-0">
+@*<a asp-controller="Preview" asp-action="IndexPreview" asp-route-formId="@item.Form.Id" class="btn btn-primary">Preview</a>*@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Forms</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Forms</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title"><a asp-action="CreateForm" type="button" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Add form</a></h3>
+        </div>
+        <div class="card-body p-0">
+            <table class="table table-striped projects">
                 <thead>
                     <tr>
-                        <th>Title</th>
-                        <th>Description</th>
-                        <th>Width</th>
-                        <th>Height</th>
-                        <th></th>
+                        <th style="width: 14%;">
+                            Title
+                        </th>
+                        <th style="width: 40%;">
+                            Description
+                        </th>
+                        <th style="width: 6%;">
+                            Width
+                        </th>
+                        <th style="width: 6%;">
+                            Height
+                        </th>
+                        <th style="width: 34%;">
+                        </th>
                     </tr>
                 </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
+                @foreach (var item in Model)
+                {
+                    <tbody>
                         <tr>
-                            <td width="12%">
-                                <a asp-route-id="@item.Form.Id" asp-action="UpdateForm">
-                                    @Html.DisplayFor(modelItem => item.Form.Title)
-                                </a>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Form.Title)
                             </td>
-                            <td width="30%">
+                            <td>
                                 @Html.DisplayFor(modelItem => item.Form.ShortDescription)
                             </td>
-                            <td width="9%">
+                            <td>
                                 @Html.DisplayFor(modelItem => item.Form.Width)
                             </td>
-                            <td width="9%">
+                            <td>
                                 @Html.DisplayFor(modelItem => item.Form.Height)
                             </td>
-                            <td width="40%">
-                                <a asp-route-id="@item.Form.Id" asp-action="UpdateForm" class="btn btn-primary">Edit</a>
-                                <a asp-route-id="@item.Form.Id" asp-action="DeleteForm" class="btn btn-primary">Delete</a>
-                                <a asp-controller="FormComponent" asp-action="IndexFormComponent" asp-route-formId="@item.Form.Id" class="btn btn-primary">Component (@item.NumOfCo)</a>
-                                <a asp-controller="Preview" asp-action="IndexPreview" asp-route-formId="@item.Form.Id" class="btn btn-primary">Preview</a>
+                            <td class="project-actions text-right">
+                                <a asp-controller="FormComponent" asp-action="IndexFormComponent" asp-route-formId="@item.Form.Id" class="btn btn-primary btn-sm">
+                                    <i class="fas fa-folder">
+                                    </i>
+                                    Components (@item.NumOfCo)
+                                </a>
+                                <a class="btn btn-info btn-sm" asp-route-id="@item.Form.Id" asp-action="UpdateForm">
+                                    <i class="fas fa-pencil-alt">
+                                    </i>
+                                    Edit
+                                </a>
+                                <a class="btn btn-danger btn-sm" asp-route-id="@item.Form.Id" asp-action="DeleteForm">
+                                    <i class="fas fa-trash">
+                                    </i>
+                                    Delete
+                                </a>
                             </td>
                         </tr>
-                    }
-                </tbody>
+                    </tbody>
+                }
             </table>
         </div>
-        <!-- /.table-responsive -->
+        <!-- /.card-body -->
     </div>
-</div>
+    <!-- /.card -->
+
+</section>
+<!-- /.content -->

@@ -805,3 +805,4 @@ D:\HTC-ITC\FormCustom\FormVer2\obj\Debug\net5.0\ref\FormVer2.dll
 D:\HTC-ITC\FormCustom\FormVer2\obj\Debug\net5.0\FormVer2.pdb
 D:\HTC-ITC\FormCustom\FormVer2\obj\Debug\net5.0\FormVer2.genruntimeconfig.cache
 D:\HTC-ITC\FormCustom\FormVer2\obj\Debug\net5.0\FormVer2.csproj.CopyComplete
+D:\HTC-ITC\FormCustom\FormVer2\obj\Debug\net5.0\FormVer2.csproj.AssemblyReference.cache
