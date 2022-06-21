@@ -66,7 +66,7 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.Form.Height)
                             </td>
-                            <td class="project-actions bg-warning disabled color-palette text-right">
+                            <td class="project-actions text-right">
                                 <a asp-controller="FormComponent" asp-action="IndexFormComponent" asp-route-formId="@item.Form.Id" class="btn btn-primary btn-sm">
                                     <i class="fas fa-folder">
                                     </i>
@@ -82,7 +82,7 @@
                                     </i>
                                     Delete
                                 </a>
-                                <a class="btn btn-danger btn-sm" asp-controller="Preview" asp-action="IndexPreview" asp-route-formId="@item.Form.Id" >
+                                <a class="btn btn-success btn-sm" asp-controller="Preview" asp-action="IndexPreview" asp-route-formId="@item.Form.Id" >
                                     <i class="fas fa-eye">
                                     </i>
                                     Preview

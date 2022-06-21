@@ -6,12 +6,99 @@
     ViewData["Title"] = "Form's Component";
 }
 
-<div class="tab-content" id="nav-tabContent">
-    <div style="padding:1rem;">
-        <button type="button" class="btn btn-primary">
-            <a asp-action="CreateFormComponent" asp-route-formId="@Model.FormId" style="color:white;">Add Form's Component'</a>
-        </button>
+@*
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Forms</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Forms</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title"><a asp-action="CreateFormComponent" asp-route-formId="@Model.FormId" type="button" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Add form</a></h3>
+        </div>
+        <div class="card-body p-0">
+            <table class="table table-striped projects">
+                <thead>
+                    <tr>
+                        <th style="width: 12%;">
+                            Title
+                        </th>
+                        <th style="width: 39%;">
+                            Description
+                        </th>
+                        <th style="width: 5%;">
+                            Width
+                        </th>
+                        <th style="width: 5%;">
+                            Height
+                        </th>
+                        <th style="width: 39%;">
+                        </th>
+                    </tr>
+                </thead>
+                @foreach (var item in Model)
+                {
+                    <tbody>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Form.Title)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Form.ShortDescription)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Form.Width)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Form.Height)
+                            </td>
+                            <td class="project-actions text-right">
+                                <a asp-controller="FormComponent" asp-action="IndexFormComponent" asp-route-formId="@item.Form.Id" class="btn btn-primary btn-sm">
+                                    <i class="fas fa-folder">
+                                    </i>
+                                    Items (@item.NumOfCo)
+                                </a>
+                                <a class="btn btn-info btn-sm" asp-route-id="@item.Form.Id" asp-action="UpdateForm">
+                                    <i class="fas fa-pencil-alt">
+                                    </i>
+                                    Edit
+                                </a>
+                                <a class="btn btn-danger btn-sm" asp-route-id="@item.Form.Id" asp-action="DeleteForm">
+                                    <i class="fas fa-trash">
+                                    </i>
+                                    Delete
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                }
+            </table>
+        </div>
+        <!-- /.card-body -->
     </div>
+    <!-- /.card -->
+
+</section>
+<!-- /.content -->
+*@
+
+<div class="tab-content" id="nav-tabContent">
     <div style="padding:1rem;">
         <table class="table table-bordered">
             <thead>
@@ -36,33 +123,33 @@
             <tbody>
                 @foreach (var item in Model.ListFormComponent)
                 {
-                <tr>
-                    <td>
-                        <a class="btn">
-                            @Html.DisplayFor(modelItem => item.ComponentId)
-                        </a>
-                    </td>
-                    <td>
-                        <a class="btn">
-                            @Html.DisplayFor(modelItem => item.TextPrompt)
-                        </a>
-                    </td>
-                    <td>
-                        <a class="btn">
-                            @Html.DisplayFor(modelItem => item.IsRequired)
-                        </a>
-                    </td>
-                    <td>
-                        <a class="btn">
-                            @Html.DisplayFor(modelItem => item.DisplayOrder)
-                        </a>
-                    </td>
-                    <td>
-                        <a asp-route-id="@item.Id" asp-action="UpdateFormComponent" class="btn btn-primary">Edit</a>
-                        <a asp-route-id="@item.Id" asp-action="DeleteFormComponent" class="btn btn-primary">Delete</a>
-                        <a asp-controller="Item" asp-action="IndexItem" asp-route-formId="@item.FormId" asp-route-componentId="@item.Id" class="btn btn-primary">Item</a>
-                    </td>
-                </tr>
+                    <tr>
+                        <td>
+                            <a class="btn">
+                                @Html.DisplayFor(modelItem => item.ComponentId)
+                            </a>
+                        </td>
+                        <td>
+                            <a class="btn">
+                                @Html.DisplayFor(modelItem => item.TextPrompt)
+                            </a>
+                        </td>
+                        <td>
+                            <a class="btn">
+                                @Html.DisplayFor(modelItem => item.IsRequired)
+                            </a>
+                        </td>
+                        <td>
+                            <a class="btn">
+                                @Html.DisplayFor(modelItem => item.DisplayOrder)
+                            </a>
+                        </td>
+                        <td>
+                            <a asp-route-id="@item.Id" asp-action="UpdateFormComponent" class="btn btn-primary">Edit</a>
+                            <a asp-route-id="@item.Id" asp-action="DeleteFormComponent" class="btn btn-primary">Delete</a>
+                            <a asp-controller="Item" asp-action="IndexItem" asp-route-formId="@item.FormId" asp-route-componentId="@item.Id" class="btn btn-primary">Item</a>
+                        </td>
+                    </tr>
                 }
             </tbody>
         </table>
