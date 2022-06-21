@@ -3,6 +3,80 @@
 @{
     ViewData["Title"] = "Form details";
 }
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Create Form</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Create Form</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <!-- SELECT2 EXAMPLE -->
+        <div asp-action="CreateForm" class="card card-default">
+            <form asp-action="CreateForm">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Title" class="control-label">Title</label>
+                                <input asp-for="Title" class="form-control" />
+                            </div>
+                            <!-- /.form-group -->
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-md-2"></div>
+                        <!-- /.col -->
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label asp-for="Width" class="control-label">Width</label>
+                                <input asp-for="Width" class="form-control" />
+                            </div>
+                            <!-- /.form-group -->
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label asp-for="Height" class="control-label">Height</label>
+                                <input asp-for="Height" class="form-control" />
+                            </div>
+                            <!-- /.form-group -->
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label asp-for="ShortDescription" class="control-label">Description</label>
+                                <textarea id="inputDescription" asp-for="ShortDescription" class="form-control" rows="4"></textarea>
+                            </div>
+                            <!-- /.form-group -->
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a asp-action="IndexForm" class="btn btn-secondary">Cancel</a>
+                    <input type="submit" value="Create New Form" class="btn btn-success float-right" />
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- /.container-fluid -->
+</section>
+<!-- /.content -->
 <div class="row">
     <div class="col-md-4">
         <form asp-action="UpdateForm">
