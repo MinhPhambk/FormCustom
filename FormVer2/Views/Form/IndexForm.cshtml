@@ -5,7 +5,6 @@
     ViewData["Title"] = "Form";
 }
 
-@*<a asp-controller="Preview" asp-action="IndexPreview" asp-route-formId="@item.Form.Id" class="btn btn-primary">Preview</a>*@
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <div class="container-fluid">
@@ -35,19 +34,19 @@
             <table class="table table-striped projects">
                 <thead>
                     <tr>
-                        <th style="width: 14%;">
+                        <th style="width: 11%;">
                             Title
                         </th>
-                        <th style="width: 40%;">
+                        <th style="width: 38%;">
                             Description
                         </th>
-                        <th style="width: 6%;">
+                        <th style="width: 4%;">
                             Width
                         </th>
-                        <th style="width: 6%;">
+                        <th style="width: 4%;">
                             Height
                         </th>
-                        <th style="width: 34%;">
+                        <th style="width: 43%;">
                         </th>
                     </tr>
                 </thead>
@@ -67,7 +66,7 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.Form.Height)
                             </td>
-                            <td class="project-actions text-right">
+                            <td class="project-actions bg-warning disabled color-palette text-right">
                                 <a asp-controller="FormComponent" asp-action="IndexFormComponent" asp-route-formId="@item.Form.Id" class="btn btn-primary btn-sm">
                                     <i class="fas fa-folder">
                                     </i>
@@ -82,6 +81,11 @@
                                     <i class="fas fa-trash">
                                     </i>
                                     Delete
+                                </a>
+                                <a class="btn btn-danger btn-sm" asp-controller="Preview" asp-action="IndexPreview" asp-route-formId="@item.Form.Id" >
+                                    <i class="fas fa-eye">
+                                    </i>
+                                    Preview
                                 </a>
                             </td>
                         </tr>
