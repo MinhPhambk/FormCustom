@@ -2,6 +2,7 @@
 @model FormComponentDTO
 @{
     ViewData["Title"] = "Form's component details";
+    List<string> ListCo = ViewBag.ListCo;
 }
 
 <!-- Content Header (Page header) -->
@@ -13,7 +14,7 @@
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a asp-action="IndexForm">Form</a></li>
+                    <li class="breadcrumb-item"><a asp-controller="Form" asp-action="IndexForm">Form</a></li>
                     <li class="breadcrumb-item"><a asp-controller="FormComponent" asp-action="IndexFormComponent" asp-route-formId="@Model.FormId">Component</a></li>
                     <li class="breadcrumb-item active">Edit Component</li>
                 </ol>
@@ -33,8 +34,14 @@
                         <!-- /.col -->
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label asp-for="ComponentId" class="control-label">Component</label>
-                                <input asp-for="ComponentId" class="form-control" />
+                                <label asp-for="ComponentId" class="control-label"></label>
+                                <select asp-for="ComponentId" class="form-control select2" style="width: 100%;">
+                                    <option>Select one</option>
+                                    @foreach (var co in ListCo)
+                                    {
+                                        <option>@co</option>
+                                    }
+                                </select>
                             </div>
                             <!-- /.form-group -->
                         </div>
@@ -64,7 +71,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label asp-for="TextPrompt" class="control-label">TextPrompt</label>
-                                <input asp-for="TextPrompt" class="form-control"></input>
+                                <input asp-for="TextPrompt" class="form-control"/>
                             </div>
                             <!-- /.form-group -->
                         </div>

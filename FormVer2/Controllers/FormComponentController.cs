@@ -70,6 +70,7 @@ namespace FormVer2.Controllers
             List<ItemDTO> ListItem = new List<ItemDTO>();
             foreach (var fc in ListFormComponent)
             {
+                fc.ComponentId = await _componentService.ParseId(fc.ComponentId);
                 ListItem = await _itemService.GetItems(formId, fc.DisplayOrder);
                 Listview.Add(new ViewFormComponentDTO(fc, ListItem.Count()));
             }
@@ -82,6 +83,14 @@ namespace FormVer2.Controllers
         [HttpGet]
         public async Task<IActionResult> UpdateFormComponent(int id)
         {
+            List<string> lstCoView = new List<string>();
+            List<ComponentDTO> ListCo = await _componentService.GetListComponents();
+            foreach (var co in ListCo)
+            {
+                lstCoView.Add(co.Name);
+            }
+            ViewBag.ListCo = lstCoView;
+
             if (id < 1)
             {
                 return NotFound();
@@ -106,8 +115,17 @@ namespace FormVer2.Controllers
         [HttpPost]
         public async Task<IActionResult> UpdateFormComponent([Bind("Id,FormId,ComponentId,TextPrompt,IsRequired,DisplayOrder")] FormComponentDTO formComponent)
         {
+            List<string> lstCoView = new List<string>();
+            List<ComponentDTO> ListCo = await _componentService.GetListComponents();
+            foreach (var co in ListCo)
+            {
+                lstCoView.Add(co.Name);
+            }
+            ViewBag.ListCo = lstCoView;
+
             try
             {
+                formComponent.ComponentId = await _componentService.ParseName(formComponent.ComponentId);
                 await _formComponentService.UpdateAsync(formComponent);
                 ViewBag.Message = "Form's component was updated successfully!";
                 return View(formComponent);
@@ -143,6 +161,7 @@ namespace FormVer2.Controllers
             int formId = formComponentDTO.FormId;
             try
             {
+                formComponentDTO.ComponentId = await _componentService.ParseName(formComponentDTO.ComponentId);
                 FormComponentDTO formComponentCheck = new FormComponentDTO();
                 formComponentCheck = await _formComponentService.FindbyId(formComponentDTO.Id);
                 if (formComponentCheck.Id < 1)

@@ -40,9 +40,9 @@ namespace FormVer2.Models.BL.ComponentBL
             List<ComponentDTO> lst = await GetListComponents();
             foreach (var c in lst)
             {
-                if (c.Name == Id)
+                if (c.Name == Name)
                 {
-                    Id = c.Name;
+                    Id = c.Id;
                     break;
                 }
             }

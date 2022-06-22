@@ -1,77 +1,161 @@
 @using FormVer2.Models.BL.ItemBL
 
 @model ViewListItemDTO
-
 @{
     ViewData["Title"] = "Item";
 }
 
-<div class="tab-content" id="nav-tabContent">
-    <div style="padding:1rem;">
-        <button type="button" class="btn btn-primary">
-            <a asp-action="CreateItem" asp-route-formId="@Model.FormId" asp-route-componentId="@Model.ComponentId" style="color:white;">Add Item</a>
-        </button>
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Create Item</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a asp-controller="Form" asp-action="IndexForm">Form</a></li>
+                    <li class="breadcrumb-item"><a asp-controller="FormComponent" asp-action="IndexFormComponent" asp-route-formId="@Model.FormId">Component</a></li>
+                    <li class="breadcrumb-item active">Create Item</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <!-- SELECT2 EXAMPLE -->
+        <div class="card card-default">
+            <form asp-action="CreateItem">
+                <div class="card-body">
+                    <div class="row">
+                        <!-- /.col -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="ComponentId" class="control-label"></label>
+                                <select asp-for="ComponentId" class="form-control select2" style="width: 100%;">
+                                    <option>Select one</option>
+                                    @foreach (var co in ListCo)
+                                    {
+                                        <option>@co</option>
+                                    }
+                                </select>
+                            </div>
+                            <!-- /.form-group -->
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-md-1"></div>
+                        <!-- /.col -->
+                        <div class="col-md-1">
+                            <div class="form-group">
+                                <label asp-for="IsRequired" class="control-label" style="text-align: center;">Require</label>
+                                <input asp-for="IsRequired" class="form-control" />
+                            </div>
+                            <!-- /.form-group -->
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-md-1"></div>
+                        <!-- /.col -->
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label asp-for="DisplayOrder" class="control-label">Order</label>
+                                <input asp-for="DisplayOrder" class="form-control" />
+                            </div>
+                            <!-- /.form-group -->
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label asp-for="TextPrompt" class="control-label">TextPrompt</label>
+                                <input asp-for="TextPrompt" class="form-control" />
+                            </div>
+                            <!-- /.form-group -->
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </div>
+                <div class="card-footer">
+                    @Html.HiddenFor(modelItem => Model.FormId)
+                    <a asp-controller="FormComponent" asp-action="IndexFormComponent" asp-route-formId="@Model.FormId" class="btn btn-secondary">Cancel</a>
+                    <input type="submit" value="Create New Component" class="btn btn-success float-right" />
+                </div>
+            </form>
+        </div>
     </div>
-    <div style="padding:1rem;">
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>
-                        FormId
-                    </th>
-                    <th>
-                        ComponentId
-                    </th>
-                    <th>
-                        Alias
-                    </th>
-                    <th>
-                        IsPreSelected
-                    </th>
-                    <th>
-                        DisplayOrder
-                    </th>
-                    <th>
-                        Action
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.ListItem)
-                {
-                <tr>
-                    <td>
-                        <a class="btn">
-                            @Html.DisplayFor(modelItem => item.FormId)
-                        </a>
-                    </td>
-                    <td>
-                        <a class="btn">
-                            @Html.DisplayFor(modelItem => item.ComponentId)
-                        </a>
-                    </td>
-                    <td>
-                        <a class="btn">
-                            @Html.DisplayFor(modelItem => item.Alias)
-                        </a>
-                    </td>
-                    <td>
-                        <a class="btn">
-                            @Html.DisplayFor(modelItem => item.IsPreSelected)
-                        </a>
-                    </td>
-                    <td>
-                        <a class="btn">
-                            @Html.DisplayFor(modelItem => item.DisplayOrder)
-                        </a>
-                    </td>
-                    <td>
-                        <a asp-route-id="@item.Id" asp-action="UpdateItem" class="btn btn-primary">Edit</a>
-                        <a asp-route-id="@item.Id" asp-action="DeleteItem" class="btn btn-primary">Delete</a>
-                    </td>
-                </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-</div>
+    <!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+
+@*<div class="tab-content" id="nav-tabContent">
+        <div style="padding:1rem;">
+            <button type="button" class="btn btn-primary">
+                <a asp-action="CreateItem" asp-route-formId="@Model.FormId" asp-route-componentId="@Model.ComponentId" style="color:white;">Add Item</a>
+            </button>
+        </div>
+        <div style="padding:1rem;">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>
+                            FormId
+                        </th>
+                        <th>
+                            ComponentId
+                        </th>
+                        <th>
+                            Alias
+                        </th>
+                        <th>
+                            IsPreSelected
+                        </th>
+                        <th>
+                            DisplayOrder
+                        </th>
+                        <th>
+                            Action
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.ListItem)
+                    {
+                    <tr>
+                        <td>
+                            <a class="btn">
+                                @Html.DisplayFor(modelItem => item.FormId)
+                            </a>
+                        </td>
+                        <td>
+                            <a class="btn">
+                                @Html.DisplayFor(modelItem => item.ComponentId)
+                            </a>
+                        </td>
+                        <td>
+                            <a class="btn">
+                                @Html.DisplayFor(modelItem => item.Alias)
+                            </a>
+                        </td>
+                        <td>
+                            <a class="btn">
+                                @Html.DisplayFor(modelItem => item.IsPreSelected)
+                            </a>
+                        </td>
+                        <td>
+                            <a class="btn">
+                                @Html.DisplayFor(modelItem => item.DisplayOrder)
+                            </a>
+                        </td>
+                        <td>
+                            <a asp-route-id="@item.Id" asp-action="UpdateItem" class="btn btn-primary">Edit</a>
+                            <a asp-route-id="@item.Id" asp-action="DeleteItem" class="btn btn-primary">Delete</a>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>*@
