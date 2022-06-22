@@ -1,5 +1,6 @@
 using FormVer2.Models.BL.FormComponentBL;
 using FormVer2.Models.BL.ComponentBL;
+using FormVer2.Models.BL.ItemBL;
 using FormVer2.Models.DL;
 using FormVer2.Models;
 using Microsoft.AspNetCore.Http;
@@ -18,15 +19,27 @@ namespace FormVer2.Controllers
     public class FormComponentController : Controller
     {
         private readonly IFormComponentService _formComponentService;
+        private readonly IComponentService _componentService;
+        private readonly IItemService _itemService;
 
-        public FormComponentController(IFormComponentService formComponentService)
+        public FormComponentController(IFormComponentService formComponentService, IComponentService componentService, IItemService itemService)
         {
             _formComponentService = formComponentService;
+            _componentService = componentService;
+            _itemService = itemService;
         }
 
         [HttpGet]
         public async Task<ActionResult> CreateFormComponent(int formId)
         {
+            List<string> lstCoView = new List<string>();
+            List<ComponentDTO> ListCo = await _componentService.GetListComponents();
+            foreach (var co in ListCo)
+            {
+                lstCoView.Add(co.Name);
+            }
+            ViewBag.ListCo = lstCoView;
+
             if (formId < 1)
             {
                 return NotFound();
@@ -43,10 +56,25 @@ namespace FormVer2.Controllers
             {
                 return NotFound();
             }
+            
+            //Get list components
             List<FormComponentDTO> ListFormComponent = new List<FormComponentDTO>();
             ListFormComponent = await _formComponentService.GetFormComponents(formId);
-            ViewFormComponentDTO model = new ViewFormComponentDTO();
-            model.ListFormComponent = ListFormComponent;
+            /*foreach(var fc in ListFormComponent)
+            {
+                fc.ComponentId = await _componentService.ParseId(fc.ComponentId);
+            }*/
+
+            ViewListFormComponentDTO model = new ViewListFormComponentDTO();
+            List<ViewFormComponentDTO> Listview = new List<ViewFormComponentDTO>();
+            List<ItemDTO> ListItem = new List<ItemDTO>();
+            foreach (var fc in ListFormComponent)
+            {
+                ListItem = await _itemService.GetItems(formId, fc.DisplayOrder);
+                Listview.Add(new ViewFormComponentDTO(fc, ListItem.Count()));
+            }
+
+            model.ListFormComponent = Listview;
             model.FormId = formId;
             return View(model);
         }

@@ -52,9 +52,9 @@ namespace FormVer2.Models.BL.PreviewBL
 
                     foreach(var i in lstItem)
                     {
-                        if ((i.FormId == formId) && (i.ComponentId == c.Id))
+                        if ((i.FormId == formId) && (i.ComponentId == c.Id) && (i.DisplayOrder == i.DisplayOrder))
                         {
-                            pr.ListItem.Add(new ItemDTO(i.Id, i.FormId, i.ComponentId, i.Alias, i.IsPreSelected, i.DisplayOrder));
+                            pr.ListItem.Add(new ItemDTO(i.Id, i.FormId, i.ComponentId.ToString(), i.Alias, i.IsPreSelected, i.DisplayOrder));
                         }
                     }
 

@@ -3,33 +3,82 @@
 @{
     ViewData["Title"] = "Form's component details";
 }
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="UpdateFormComponent">
-            <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" />
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Edit Component</h1>
             </div>
-            <div class="form-group">
-                <label asp-for="FormId" class="control-label"></label>
-                <input asp-for="FormId" class="form-control" />
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a asp-action="IndexForm">Form</a></li>
+                    <li class="breadcrumb-item"><a asp-controller="FormComponent" asp-action="IndexFormComponent" asp-route-formId="@Model.FormId">Component</a></li>
+                    <li class="breadcrumb-item active">Edit Component</li>
+                </ol>
             </div>
-            <div class="form-group">
-                <label asp-for="ComponentId" class="control-label"></label>
-                <input asp-for="ComponentId" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label asp-for="IsRequired" class="control-label"></label>
-                <input asp-for="IsRequired" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label asp-for="DisplayOrder" class="control-label"></label>
-                <input asp-for="DisplayOrder" class="form-control" />
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save changes" class="btn btn-primary" />
-                <a asp-controller="FormComponent" asp-action="IndexFormComponent" asp-route-formId="@Model.FormId" class="btn btn-success">Cancel</a>
-            </div>
-        </form>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <!-- SELECT2 EXAMPLE -->
+        <div class="card card-default">
+            <form asp-action="UpdateFormComponent">
+                <div class="card-body">
+                    <div class="row">
+                        <!-- /.col -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="ComponentId" class="control-label">Component</label>
+                                <input asp-for="ComponentId" class="form-control" />
+                            </div>
+                            <!-- /.form-group -->
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-md-1"></div>
+                        <!-- /.col -->
+                        <div class="col-md-1">
+                            <div class="form-group">
+                                <label asp-for="IsRequired" class="control-label" style="text-align: center;">Require</label>
+                                <input asp-for="IsRequired" class="form-control" />
+                            </div>
+                            <!-- /.form-group -->
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-md-1"></div>
+                        <!-- /.col -->  
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label asp-for="DisplayOrder" class="control-label">Order</label>
+                                <input asp-for="DisplayOrder" class="form-control" />
+                            </div>
+                            <!-- /.form-group -->
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label asp-for="TextPrompt" class="control-label">TextPrompt</label>
+                                <input asp-for="TextPrompt" class="form-control"></input>
+                            </div>
+                            <!-- /.form-group -->
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </div>
+                <div class="card-footer">
+                    @Html.HiddenFor(modelItem => Model.FormId)
+                    <a asp-controller="FormComponent" asp-action="IndexFormComponent" asp-route-formId="@Model.FormId" class="btn btn-secondary">Cancel</a>
+                    <input type="submit" value="Update Component" class="btn btn-info float-right" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
+    <!-- /.container-fluid -->
+</section>
+<!-- /.content -->

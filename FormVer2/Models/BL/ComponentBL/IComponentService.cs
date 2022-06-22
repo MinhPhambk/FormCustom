@@ -5,8 +5,9 @@ namespace FormVer2.Models.BL.ComponentBL
 {
     public interface IComponentService
     {
-        public Task<string> ParseId(int Id);
-        public Task<bool> GetBoolContain(int Id);
+        public Task<string> ParseId(string Id);
+        public Task<string> ParseName(string Name);
+        public Task<bool> GetBoolContain(string Id);
         public Task<List<ComponentDTO>> GetListComponents();
     }
 }

@@ -28,7 +28,7 @@ namespace FormVer2.Models.BL.FormComponentBL
             {
                 foreach (FormComponent fc in lst)
                 {
-                    lstDTO.Add(new FormComponentDTO(fc.Id, fc.FormId, fc.ComponentId, fc.TextPrompt, fc.IsRequired, fc.DisplayOrder));
+                    lstDTO.Add(new FormComponentDTO(fc.Id, fc.FormId, fc.ComponentId.ToString(), fc.TextPrompt, fc.IsRequired, fc.DisplayOrder));
                 }
             }
 
@@ -44,7 +44,7 @@ namespace FormVer2.Models.BL.FormComponentBL
                 FormComponent formComponentModel = new FormComponent();
                 formComponentModel.Id = formComponent.Id;
                 formComponentModel.FormId = formComponent.FormId;
-                formComponentModel.ComponentId = formComponent.ComponentId;
+                formComponentModel.ComponentId = Int32.Parse(formComponent.ComponentId);
                 formComponentModel.TextPrompt = formComponent.TextPrompt;
                 formComponentModel.IsRequired = formComponent.IsRequired;
                 formComponentModel.DisplayOrder = formComponent.DisplayOrder;
@@ -66,7 +66,7 @@ namespace FormVer2.Models.BL.FormComponentBL
                 FormComponent formComponentModel = new FormComponent();
                 formComponentModel.Id = formComponent.Id;
                 formComponentModel.FormId = formComponent.FormId;
-                formComponentModel.ComponentId = formComponent.ComponentId;
+                formComponentModel.ComponentId = Int32.Parse(formComponent.ComponentId);
                 formComponentModel.TextPrompt = formComponent.TextPrompt;
                 formComponentModel.IsRequired = formComponent.IsRequired;
                 formComponentModel.DisplayOrder = formComponent.DisplayOrder;
@@ -101,7 +101,7 @@ namespace FormVer2.Models.BL.FormComponentBL
             FormComponentDTO formComponentDTO = new FormComponentDTO();
             if (formComponentModel != null)
             {
-                formComponentDTO = new FormComponentDTO(formComponentModel.Id, formComponentModel.FormId, formComponentModel.ComponentId, formComponentModel.TextPrompt, formComponentModel.IsRequired, formComponentModel.DisplayOrder);
+                formComponentDTO = new FormComponentDTO(formComponentModel.Id, formComponentModel.FormId, formComponentModel.ComponentId.ToString(), formComponentModel.TextPrompt, formComponentModel.IsRequired, formComponentModel.DisplayOrder);
             }
             return formComponentDTO;
         }
@@ -115,7 +115,7 @@ namespace FormVer2.Models.BL.FormComponentBL
                 foreach (FormComponent formComponent in lst)
                 {
                     if (formComponent.FormId == formId)
-                        lstDTO.Add(new FormComponentDTO(formComponent.Id, formComponent.FormId, formComponent.ComponentId, formComponent.TextPrompt, formComponent.IsRequired, formComponent.DisplayOrder));
+                        lstDTO.Add(new FormComponentDTO(formComponent.Id, formComponent.FormId, formComponent.ComponentId.ToString(), formComponent.TextPrompt, formComponent.IsRequired, formComponent.DisplayOrder));
                 }
             }
 

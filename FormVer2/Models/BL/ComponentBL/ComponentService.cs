@@ -20,7 +20,7 @@ namespace FormVer2.Models.BL.ComponentBL
             dbContext = appDbContext;
         }
 
-        public async Task<string> ParseId(int Id)
+        public async Task<string> ParseId(string Id)
         {
             string Name = "Not found!";
             List<ComponentDTO> lst = await GetListComponents();
@@ -34,7 +34,21 @@ namespace FormVer2.Models.BL.ComponentBL
             }
             return Name;
         }
-        public async Task<bool> GetBoolContain(int Id)
+        public async Task<string> ParseName(string Name)
+        {
+            string Id = "Not found!";
+            List<ComponentDTO> lst = await GetListComponents();
+            foreach (var c in lst)
+            {
+                if (c.Name == Id)
+                {
+                    Id = c.Name;
+                    break;
+                }
+            }
+            return Id;
+        }
+        public async Task<bool> GetBoolContain(string Id)
         {
             bool value = true;
             List<ComponentDTO> lst = await GetListComponents();
@@ -57,7 +71,7 @@ namespace FormVer2.Models.BL.ComponentBL
             {
                 foreach (Component co in lst)
                 {
-                    lstDTO.Add(new ComponentDTO(co.Id, co.Name, co.ContainValue));
+                    lstDTO.Add(new ComponentDTO(co.Id.ToString(), co.Name, co.ContainValue));
                 }
             }
 

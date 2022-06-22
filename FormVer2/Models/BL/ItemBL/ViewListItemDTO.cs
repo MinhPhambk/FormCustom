@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace FormVer2.Models.BL.ItemBL
 {
-    public class ViewItemDTO
+    public class ViewListItemDTO
     {
         public int FormId { get; set; }
         public int ComponentId { get; set; }

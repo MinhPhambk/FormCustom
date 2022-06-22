@@ -3,7 +3,7 @@ namespace FormVer2.Models.BL.ItemBL
     public class ItemDTO
     {
         public ItemDTO() { }
-        public ItemDTO(int item_id, int item_formid, int item_componentid, string item_alias, bool item_ispreselected, int item_displayorder)
+        public ItemDTO(int item_id, int item_formid, string item_componentid, string item_alias, bool item_ispreselected, int item_displayorder)
         {
             this.Id = item_id;
             this.FormId = item_formid;
@@ -14,7 +14,7 @@ namespace FormVer2.Models.BL.ItemBL
         }
         public int Id { get; set; }
         public int FormId { get; set; }
-        public int ComponentId { get; set; }
+        public string ComponentId { get; set; }
         public string Alias { get; set; }
         public bool IsPreSelected { get; set; }
         public int DisplayOrder { get; set; }

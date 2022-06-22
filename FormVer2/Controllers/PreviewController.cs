@@ -37,8 +37,8 @@ namespace FormVer2.Controllers
             previewFormDTO = await _previewService.GetPreviews(formId);
             foreach (var c in previewFormDTO.ListComponent)
             {
-                c.ContainValue = await _componentService.GetBoolContain(Int32.Parse(c.Name));
-                c.Name = await _componentService.ParseId(Int32.Parse(c.Name));
+                c.ContainValue = await _componentService.GetBoolContain(c.Name);
+                c.Name = await _componentService.ParseId(c.Name);
             }
             return View(previewFormDTO);
         }

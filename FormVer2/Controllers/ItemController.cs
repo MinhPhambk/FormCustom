@@ -18,16 +18,18 @@ namespace FormVer2.Controllers
     public class ItemController : Controller
     {
         private readonly IItemService _itemService;
+        private readonly IComponentService _componentService;
 
-        public ItemController(IItemService itemService)
+        public ItemController(IItemService itemService, IComponentService componentService)
         {
             _itemService = itemService;
+            _componentService = componentService;
         }
 
         [HttpGet]
-        public async Task<ActionResult> CreateItem(int formId, int componentId)
+        public async Task<ActionResult> CreateItem(int formId, string componentId)
         {
-            if ((formId < 1) && (componentId < 1))
+            if ((formId < 1) && (componentId == null))
             {
                 return NotFound();
             }
@@ -38,18 +40,19 @@ namespace FormVer2.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> IndexItem(int formId, int componentId)
+        public async Task<IActionResult> IndexItem(int formId, string componentId, int displayorder)
         {
-            if ((formId < 1) && (componentId < 1))
+            componentId = await _componentService.ParseName(componentId);
+            if ((formId < 1) && (componentId == null))
             {
                 return NotFound();
             }
             List<ItemDTO> ListItem = new List<ItemDTO>();
-            ListItem = await _itemService.GetItems(formId, componentId);
-            ViewItemDTO model = new ViewItemDTO();
+            ListItem = await _itemService.GetItems(formId, displayorder);
+            ViewListItemDTO model = new ViewListItemDTO();
             model.ListItem = ListItem;
             model.FormId = formId;
-            model.ComponentId = componentId;
+            //model.ComponentId = Int32.Parse(componentId);
             return View(model);
         }
 
@@ -98,7 +101,7 @@ namespace FormVer2.Controllers
         {
             ItemDTO model = await _itemService.FindbyId(id);
             int formId = model.FormId;
-            int componentId = model.ComponentId;
+            string componentId = model.ComponentId;
             try
             {
                 await _itemService.DeleteAsync(id);
@@ -116,7 +119,7 @@ namespace FormVer2.Controllers
         {
 
             int formId = itemDTO.FormId;
-            int componentId = itemDTO.ComponentId;
+            string componentId = itemDTO.ComponentId;
             try
             {
                 ItemDTO itemCheck = new ItemDTO();
