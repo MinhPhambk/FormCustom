@@ -4,26 +4,51 @@
     ViewData["Title"] = "Delete item";
 }
 
-<div class="tab-content" id="nav-tabContent">
-    <div style="padding: 1rem">
-        <div class="row">
-            <div class="col-md-4">
-                <form asp-action="DeleteConfirmed">
-                    <div class="form-group">
-                        <label asp-for="Id" class="control-label"></label>
-                        <input asp-for="Id" class="form-control" readonly />
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Alias" class="control-label"></label>
-                        <input asp-for="Alias" class="form-control" readonly />
-                    </div>
-                    <div class="form-group">
-                        @Html.HiddenFor(modelItem => Model.Id)
-                        <input type="submit" value="Delete" class="btn btn-primary" />
-                        <a asp-controller="Item" asp-action="IndexItem" asp-route-formId="@Model.FormId" asp-route-componentId="@Model.ComponentId" class="btn btn-success">Cancel</a>
-                    </div>
-                </form>
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Delete Item</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a asp-controller="Form" asp-action="IndexForm">Form</a></li>
+                    <li class="breadcrumb-item"><a asp-controller="FormComponent" asp-action="IndexFormComponent" asp-route-formId="@Model.FormId">Component</a></li>
+                    <li class="breadcrumb-item"><a asp-controller="Item" asp-action="IndexItem" asp-route-formcomponentId="@Model.FormComponentId">Item</a></li>
+                    <li class="breadcrumb-item active">Delete Item</li>
+                </ol>
             </div>
         </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <!-- SELECT2 EXAMPLE -->
+        <div class="card card-default">
+            <form asp-action="DeleteConfirmed">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <label asp-for="Alias" class="control-label">Alias</label>
+                                <input asp-for="Alias" class="form-control" disabled />
+                            </div>
+                            <!-- /.form-group -->
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </div>
+                <div class="card-footer">
+                    @Html.HiddenFor(modelItem => Model.Id)
+                    <a asp-controller="Item" asp-action="IndexItem" asp-route-formcomponentId="@Model.FormComponentId" class="btn btn-secondary">Cancel</a>
+                    <input type="submit" value="Delete Item" class="btn btn-danger float-right" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
+    <!-- /.container-fluid -->
+</section>
+<!-- /.content -->

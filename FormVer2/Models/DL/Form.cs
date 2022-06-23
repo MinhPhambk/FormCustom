@@ -10,7 +10,6 @@ namespace FormVer2.Models.DL
         public Form()
         {
             FormComponents = new HashSet<FormComponent>();
-            Items = new HashSet<Item>();
         }
 
         public int Id { get; set; }
@@ -20,6 +19,5 @@ namespace FormVer2.Models.DL
         public decimal Height { get; set; }
 
         public virtual ICollection<FormComponent> FormComponents { get; set; }
-        public virtual ICollection<Item> Items { get; set; }
     }
 }

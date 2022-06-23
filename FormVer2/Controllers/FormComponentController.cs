@@ -71,7 +71,7 @@ namespace FormVer2.Controllers
             foreach (var fc in ListFormComponent)
             {
                 fc.ComponentId = await _componentService.ParseId(fc.ComponentId);
-                ListItem = await _itemService.GetItems(formId, fc.DisplayOrder);
+                ListItem = await _itemService.GetItems(fc.Id);
                 Listview.Add(new ViewFormComponentDTO(fc, ListItem.Count()));
             }
 

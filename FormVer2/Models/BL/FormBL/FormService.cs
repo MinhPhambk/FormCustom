@@ -70,18 +70,21 @@ namespace FormVer2.Models.BL.FormBL
 
                 List<FormComponent> ListComponent = new List<FormComponent>();
                 ListComponent = await dbContext.FormComponents.ToListAsync();
-                foreach (var c in ListComponent)
-                {
-                    if (c.FormId == formId) 
-                        dbContext.FormComponents.Remove(c);
-                }
-
                 List<Item> ListItem = new List<Item>();
                 ListItem = await dbContext.Items.ToListAsync();
-                foreach (var i in ListItem)
+
+                foreach (var c in ListComponent)
                 {
-                    if (i.FormId == formId)
-                        dbContext.Items.Remove(i);
+                    if (c.FormId == formId)
+                    {
+                        foreach (var i in ListItem)
+                        {
+                            if (i.FormComponentId == c.Id)
+                                dbContext.Items.Remove(i);
+                        }
+                        dbContext.FormComponents.Remove(c);
+                    }
+                        
                 }
 
                 dbContext.Forms.Remove(formTmp);

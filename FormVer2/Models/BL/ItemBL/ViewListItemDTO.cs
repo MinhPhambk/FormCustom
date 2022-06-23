@@ -8,7 +8,7 @@ namespace FormVer2.Models.BL.ItemBL
     public class ViewListItemDTO
     {
         public int FormId { get; set; }
-        public int ComponentId { get; set; }
+        public int FormComponentId { get; set; }
         public List<ItemDTO> ListItem { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 using FormVer2.Models.BL.ItemBL;
 using FormVer2.Models.BL.ComponentBL;
+using FormVer2.Models.BL.FormComponentBL;
 using FormVer2.Models.DL;
 using FormVer2.Models;
 using Microsoft.AspNetCore.Http;
@@ -19,40 +20,55 @@ namespace FormVer2.Controllers
     {
         private readonly IItemService _itemService;
         private readonly IComponentService _componentService;
+        private readonly IFormComponentService _formComponentService;
 
-        public ItemController(IItemService itemService, IComponentService componentService)
+        public ItemController(IItemService itemService, IComponentService componentService, IFormComponentService formComponentService)
         {
             _itemService = itemService;
             _componentService = componentService;
+            _formComponentService = formComponentService;
         }
 
         [HttpGet]
-        public async Task<ActionResult> CreateItem(int formId, string componentId)
+        public async Task<ActionResult> CreateItem(int formcomponentId)
         {
-            if ((formId < 1) && (componentId == null))
+            List<string> lstCoView = new List<string>();
+            List<ComponentDTO> ListCo = await _componentService.GetListComponents();
+            foreach (var co in ListCo)
+            {
+                lstCoView.Add(co.Name);
+            }
+            ViewBag.ListCo = lstCoView;
+
+            if (formcomponentId < 1)
             {
                 return NotFound();
             }
+
+
+            FormComponentDTO foco = new FormComponentDTO();
+            foco = await _formComponentService.FindbyId(formcomponentId);
             ItemDTO model = new ItemDTO();
-            model.FormId = formId;
-            model.ComponentId = componentId;
+            model.FormComponentId = foco.Id;
+            model.FormId = foco.FormId;
             return View(model);
         }
 
         [HttpGet]
-        public async Task<IActionResult> IndexItem(int formId, string componentId, int displayorder)
+        public async Task<IActionResult> IndexItem(int formcomponentId)
         {
-            componentId = await _componentService.ParseName(componentId);
-            if ((formId < 1) && (componentId == null))
+            if (formcomponentId < 1)
             {
                 return NotFound();
             }
             List<ItemDTO> ListItem = new List<ItemDTO>();
-            ListItem = await _itemService.GetItems(formId, displayorder);
+            ListItem = await _itemService.GetItems(formcomponentId);
+            FormComponentDTO foco = new FormComponentDTO();
+            foco = await _formComponentService.FindbyId(formcomponentId);
             ViewListItemDTO model = new ViewListItemDTO();
             model.ListItem = ListItem;
-            model.FormId = formId;
-            //model.ComponentId = Int32.Parse(componentId);
+            model.FormId = foco.FormId;
+            model.FormComponentId = formcomponentId;
             return View(model);
         }
 
@@ -81,7 +97,7 @@ namespace FormVer2.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdateItem([Bind("Id,FormId,ComponentId,Alias,IsPreSelected,DisplayOrder")] ItemDTO item)
+        public async Task<IActionResult> UpdateItem([Bind("Id,FormComponentId,Alias,IsPreSelected,DisplayOrder")] ItemDTO item)
         {
             try
             {
@@ -100,8 +116,6 @@ namespace FormVer2.Controllers
         public async Task<IActionResult> DeleteConfirmed([Bind("Id")] int id)
         {
             ItemDTO model = await _itemService.FindbyId(id);
-            int formId = model.FormId;
-            string componentId = model.ComponentId;
             try
             {
                 await _itemService.DeleteAsync(id);
@@ -111,15 +125,20 @@ namespace FormVer2.Controllers
             {
                 ViewBag.Message = "Value error!";
             }
-            return RedirectToAction("IndexItem", "Item", new { @formId = formId, @componentId = componentId });
+            return RedirectToAction("IndexItem", "Item", new { @formcomponentId = model.FormComponentId });
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateItem([Bind("FormId,ComponentId,Alias,IsPreSelected,DisplayOrder")] ItemDTO itemDTO)
+        public async Task<IActionResult> CreateItem([Bind("FormComponentId,Alias,IsPreSelected,DisplayOrder")] ItemDTO itemDTO)
         {
-
-            int formId = itemDTO.FormId;
-            string componentId = itemDTO.ComponentId;
+            List<string> lstCoView = new List<string>();
+            List<ComponentDTO> ListCo = await _componentService.GetListComponents();
+            foreach (var co in ListCo)
+            {
+                lstCoView.Add(co.Name);
+            }
+            ViewBag.ListCo = lstCoView;
+            //
             try
             {
                 ItemDTO itemCheck = new ItemDTO();
@@ -134,7 +153,7 @@ namespace FormVer2.Controllers
             {
                 ViewBag.Message = "Value error!";
             }
-            return RedirectToAction("IndexItem", "Item", new { @formId = formId, @componentId = componentId });
+            return RedirectToAction("IndexItem", "Item", new { @formcomponentId = itemDTO.FormComponentId });
         }
     }
 }

@@ -5,6 +5,6 @@ namespace FormVer2.Models.BL.PreviewBL
 {
     public interface IPreviewService
     {
-        public Task<PreviewFormDTO> GetPreviews(int formId);
+        public Task<PreviewFormDTO> GetPreview(int formId);
     }
 }

@@ -23,10 +23,10 @@ namespace FormVer2.Models.BL.PreviewBL
             dbContext = appDbContext;
         }
 
-        public async Task<PreviewFormDTO> GetPreviews(int formId)
+        public async Task<PreviewFormDTO> GetPreview(int formId)
         {
+            // Get form
             PreviewFormDTO formPreview = new PreviewFormDTO();
-
             Form form = await dbContext.Forms.FirstOrDefaultAsync(m => m.Id == formId);
             formPreview.Id = form.Id;
             formPreview.Title = form.Title;
@@ -35,10 +35,12 @@ namespace FormVer2.Models.BL.PreviewBL
             formPreview.Height = form.Height;
             formPreview.ListComponent = new List<PreviewComponentDTO>();
 
+            // Get list components
             List<Item> lstItem = new List<Item>();
             lstItem = await dbContext.Items.ToListAsync();
             List<FormComponent> lstComponent = new List<FormComponent>();
             lstComponent = await dbContext.FormComponents.ToListAsync();
+
             foreach(var c in lstComponent)
             {
                 if (c.FormId == formId)
@@ -50,11 +52,12 @@ namespace FormVer2.Models.BL.PreviewBL
                     pr.ContainValue = new bool();
                     pr.ListItem = new List<ItemDTO>();
 
+                    // Get list items
                     foreach(var i in lstItem)
                     {
-                        if ((i.FormId == formId) && (i.ComponentId == c.Id) && (i.DisplayOrder == i.DisplayOrder))
+                        if (i.FormComponentId == c.Id)
                         {
-                            pr.ListItem.Add(new ItemDTO(i.Id, i.FormId, i.ComponentId.ToString(), i.Alias, i.IsPreSelected, i.DisplayOrder));
+                            pr.ListItem.Add(new ItemDTO(i.Id, i.FormComponentId, i.Alias, i.IsPreSelected, i.DisplayOrder));
                         }
                     }
 

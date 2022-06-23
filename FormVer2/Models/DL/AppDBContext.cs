@@ -77,11 +77,11 @@ namespace FormVer2.Models.DL
                     .IsRequired()
                     .HasMaxLength(400);
 
-                entity.HasOne(d => d.Form)
+                entity.HasOne(d => d.FormComponent)
                     .WithMany(p => p.Items)
-                    .HasForeignKey(d => d.FormId)
+                    .HasForeignKey(d => d.FormComponentId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Item__FormId__52593CB8");
+                    .HasConstraintName("FK__Item__FormCompon__70DDC3D8");
             });
 
             OnModelCreatingPartial(modelBuilder);

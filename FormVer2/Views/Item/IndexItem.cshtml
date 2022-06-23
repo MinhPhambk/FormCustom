@@ -10,13 +10,13 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Create Item</h1>
+                <h1>Items</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a asp-controller="Form" asp-action="IndexForm">Form</a></li>
                     <li class="breadcrumb-item"><a asp-controller="FormComponent" asp-action="IndexFormComponent" asp-route-formId="@Model.FormId">Component</a></li>
-                    <li class="breadcrumb-item active">Create Item</li>
+                    <li class="breadcrumb-item active">Item</li>
                 </ol>
             </div>
         </div>
@@ -25,71 +25,66 @@
 
 <!-- Main content -->
 <section class="content">
-    <div class="container-fluid">
-        <!-- SELECT2 EXAMPLE -->
-        <div class="card card-default">
-            <form asp-action="CreateItem">
-                <div class="card-body">
-                    <div class="row">
-                        <!-- /.col -->
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label asp-for="ComponentId" class="control-label"></label>
-                                <select asp-for="ComponentId" class="form-control select2" style="width: 100%;">
-                                    <option>Select one</option>
-                                    @foreach (var co in ListCo)
-                                    {
-                                        <option>@co</option>
-                                    }
-                                </select>
-                            </div>
-                            <!-- /.form-group -->
-                        </div>
-                        <!-- /.col -->
-                        <div class="col-md-1"></div>
-                        <!-- /.col -->
-                        <div class="col-md-1">
-                            <div class="form-group">
-                                <label asp-for="IsRequired" class="control-label" style="text-align: center;">Require</label>
-                                <input asp-for="IsRequired" class="form-control" />
-                            </div>
-                            <!-- /.form-group -->
-                        </div>
-                        <!-- /.col -->
-                        <div class="col-md-1"></div>
-                        <!-- /.col -->
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label asp-for="DisplayOrder" class="control-label">Order</label>
-                                <input asp-for="DisplayOrder" class="form-control" />
-                            </div>
-                            <!-- /.form-group -->
-                        </div>
-                        <!-- /.col -->
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label asp-for="TextPrompt" class="control-label">TextPrompt</label>
-                                <input asp-for="TextPrompt" class="form-control" />
-                            </div>
-                            <!-- /.form-group -->
-                        </div>
-                        <!-- /.col -->
-                    </div>
-                </div>
-                <div class="card-footer">
-                    @Html.HiddenFor(modelItem => Model.FormId)
-                    <a asp-controller="FormComponent" asp-action="IndexFormComponent" asp-route-formId="@Model.FormId" class="btn btn-secondary">Cancel</a>
-                    <input type="submit" value="Create New Component" class="btn btn-success float-right" />
-                </div>
-            </form>
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title"><a asp-action="CreateItem" asp-route-formcomponentId="@Model.FormComponentId" type="button" class="btn btn-primary float-right"><i class="fas fa-plus"></i>  Add Item</a></h3>
         </div>
+        <div class="card-body p-0">
+            <table class="table table-striped projects">
+                <thead>
+                    <tr>
+                        <th style="width: 30%;">
+                            Alias
+                        </th>
+                        <th style="width: 29%;">
+                            IsPreSelected
+                        </th>
+                        <th style="width: 8%;">
+                            Order
+                        </th>
+                        <th style="width: 33%;">
+                        </th>
+                    </tr>
+                </thead>
+                @foreach (var item in Model.ListItem)
+                {
+                    <tbody>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Alias)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IsPreSelected)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DisplayOrder)
+                            </td>
+                            <td class="project-actions text-right">
+                                @Html.HiddenFor(modelItem => item.Id)
+                                @Html.HiddenFor(modelItem => item.FormId)
+                                <a class="btn btn-info btn-sm" asp-route-id="@item.Id" asp-action="UpdateItem">
+                                    <i class="fas fa-pencil-alt">
+                                    </i>
+                                    Edit
+                                </a>
+                                <a class="btn btn-danger btn-sm" asp-route-id="@item.Id" asp-action="DeleteItem">
+                                    <i class="fas fa-trash">
+                                    </i>
+                                    Delete
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                }
+            </table>
+        </div>
+        <!-- /.card-body -->
     </div>
-    <!-- /.container-fluid -->
+    <!-- /.card -->
 </section>
 <!-- /.content -->
-
 @*<div class="tab-content" id="nav-tabContent">
         <div style="padding:1rem;">
             <button type="button" class="btn btn-primary">
@@ -100,12 +95,6 @@
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th>
-                            FormId
-                        </th>
-                        <th>
-                            ComponentId
-                        </th>
                         <th>
                             Alias
                         </th>

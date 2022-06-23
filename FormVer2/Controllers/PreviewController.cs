@@ -34,7 +34,7 @@ namespace FormVer2.Controllers
                 return NotFound();
             }
             PreviewFormDTO previewFormDTO = new PreviewFormDTO();
-            previewFormDTO = await _previewService.GetPreviews(formId);
+            previewFormDTO = await _previewService.GetPreview(formId);
             foreach (var c in previewFormDTO.ListComponent)
             {
                 c.ContainValue = await _componentService.GetBoolContain(c.Name);

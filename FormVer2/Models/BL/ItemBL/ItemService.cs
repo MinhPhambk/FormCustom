@@ -27,8 +27,7 @@ namespace FormVer2.Models.BL.ItemBL
             {
                 Item itemModel = new Item();
                 itemModel.Id = item.Id;
-                itemModel.FormId = item.FormId;
-                itemModel.ComponentId = Int32.Parse(item.ComponentId);
+                itemModel.FormComponentId = item.FormComponentId;
                 itemModel.Alias = item.Alias;
                 itemModel.IsPreSelected = item.IsPreSelected;
                 itemModel.DisplayOrder = item.DisplayOrder;
@@ -49,8 +48,7 @@ namespace FormVer2.Models.BL.ItemBL
             {
                 Item itemModel = new Item();
                 itemModel.Id = item.Id;
-                itemModel.FormId = item.FormId;
-                itemModel.ComponentId = Int32.Parse(item.ComponentId);
+                itemModel.FormComponentId = item.FormComponentId;
                 itemModel.Alias = item.Alias;
                 itemModel.IsPreSelected = item.IsPreSelected;
                 itemModel.DisplayOrder = item.DisplayOrder;
@@ -85,11 +83,11 @@ namespace FormVer2.Models.BL.ItemBL
             ItemDTO itemDTO = new ItemDTO();
             if (itemModel != null)
             {
-                itemDTO = new ItemDTO(itemModel.Id, itemModel.FormId, itemModel.ComponentId.ToString(), itemModel.Alias, itemModel.IsPreSelected, itemModel.DisplayOrder);
+                itemDTO = new ItemDTO(itemModel.Id, itemModel.FormComponentId, itemModel.Alias, itemModel.IsPreSelected, itemModel.DisplayOrder);
             }
             return itemDTO;
         }
-        public async Task<List<ItemDTO>> GetItems(int formId, int displayOrder)
+        public async Task<List<ItemDTO>> GetItems(int formcomponentId)
         {
             List<Item> lst = await dbContext.Items.ToListAsync();
             List<ItemDTO> lstDTO = new List<ItemDTO>();
@@ -98,8 +96,8 @@ namespace FormVer2.Models.BL.ItemBL
             {
                 foreach (Item item in lst)
                 {
-                    if ((item.FormId == formId) && (item.DisplayOrder == displayOrder))
-                        lstDTO.Add(new ItemDTO(item.Id, item.FormId, item.ComponentId.ToString(), item.Alias, item.IsPreSelected, item.DisplayOrder));
+                    if (item.FormComponentId == formcomponentId)
+                        lstDTO.Add(new ItemDTO(item.Id, item.FormComponentId, item.Alias, item.IsPreSelected, item.DisplayOrder));
                 }
             }
 
