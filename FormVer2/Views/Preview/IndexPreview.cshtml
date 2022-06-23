@@ -32,13 +32,14 @@
         <div class="col-md-6">
             <div class="card card-info">
                 <div class="card-header">
-                    <label>Description</label>
+                    
                     <h3 class="card-title">@Model.Title</h3>
                 </div>
                 <div class="card-body">
-                    <p>@Model.ShortDescription</p>
-                </div>
-                <div class="card-body">
+                    <div class="form-group">
+                        <label>Description</label>
+                        <p>@Model.ShortDescription</p>
+                    </div>
                     @foreach (var c in Model.ListComponent)
                     {
                         var str = "_" + c.Name;
