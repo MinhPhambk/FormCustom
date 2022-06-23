@@ -1,4 +1,5 @@
 using FormVer2.Models.BL.FormComponentBL;
+using FormVer2.Models.BL.FormBL;
 using FormVer2.Models.BL.ComponentBL;
 using FormVer2.Models.BL.ItemBL;
 using FormVer2.Models.DL;
@@ -21,9 +22,11 @@ namespace FormVer2.Controllers
         private readonly IFormComponentService _formComponentService;
         private readonly IComponentService _componentService;
         private readonly IItemService _itemService;
+        private readonly IFormService _formService;
 
-        public FormComponentController(IFormComponentService formComponentService, IComponentService componentService, IItemService itemService)
+        public FormComponentController(IFormService formService, IFormComponentService formComponentService, IComponentService componentService, IItemService itemService)
         {
+            _formService = formService;
             _formComponentService = formComponentService;
             _componentService = componentService;
             _itemService = itemService;
@@ -60,10 +63,6 @@ namespace FormVer2.Controllers
             //Get list components
             List<FormComponentDTO> ListFormComponent = new List<FormComponentDTO>();
             ListFormComponent = await _formComponentService.GetFormComponents(formId);
-            /*foreach(var fc in ListFormComponent)
-            {
-                fc.ComponentId = await _componentService.ParseId(fc.ComponentId);
-            }*/
 
             ViewListFormComponentDTO model = new ViewListFormComponentDTO();
             List<ViewFormComponentDTO> Listview = new List<ViewFormComponentDTO>();
@@ -75,8 +74,12 @@ namespace FormVer2.Controllers
                 Listview.Add(new ViewFormComponentDTO(fc, ListItem.Count()));
             }
 
+            FormDTO form = new FormDTO();
+            form = await _formService.FindbyId(formId);
+
             model.ListFormComponent = Listview;
             model.FormId = formId;
+            model.FormName = form.Title;
             return View(model);
         }
 

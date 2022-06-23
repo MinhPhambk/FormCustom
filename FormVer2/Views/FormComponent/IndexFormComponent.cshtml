@@ -29,7 +29,9 @@
     <!-- Default box -->
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title"><a asp-action="CreateFormComponent" asp-route-formId="@Model.FormId" type="button" class="btn btn-primary float-right"><i class="fas fa-plus"></i>  Add Component</a></h3>
+            <h3 class="card-title">
+                List of components that belongs to the form (<a class="secondary">@Model.FormName</a>)
+            </h3>
         </div>
         <div class="card-body p-0">
             <table class="table table-striped projects">
@@ -104,6 +106,10 @@
                     </tbody>
                 }
             </table>
+        </div>
+        <div class="card-footer">
+            <h3 class="card-title"><a asp-action="CreateFormComponent" asp-route-formId="@Model.FormId" type="button" class="btn btn-primary float-right"><i class="fas fa-plus"></i>  Add Component</a></h3>
+            <h3 class="card-title float-right"><a asp-controller="Form" asp-action="IndexForm" type="button" class="btn btn-secondary"><i class="fa-solid fa-arrow-rotate-left"></i>  Back to Form</a></h3>
         </div>
         <!-- /.card-body -->
     </div>

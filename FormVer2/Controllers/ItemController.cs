@@ -1,4 +1,5 @@
 using FormVer2.Models.BL.ItemBL;
+using FormVer2.Models.BL.FormBL;
 using FormVer2.Models.BL.ComponentBL;
 using FormVer2.Models.BL.FormComponentBL;
 using FormVer2.Models.DL;
@@ -19,11 +20,13 @@ namespace FormVer2.Controllers
     public class ItemController : Controller
     {
         private readonly IItemService _itemService;
+        private readonly IFormService _formService;
         private readonly IComponentService _componentService;
         private readonly IFormComponentService _formComponentService;
 
-        public ItemController(IItemService itemService, IComponentService componentService, IFormComponentService formComponentService)
+        public ItemController(IItemService itemService, IComponentService componentService, IFormComponentService formComponentService, IFormService formService)
         {
+            _formService = formService;
             _itemService = itemService;
             _componentService = componentService;
             _formComponentService = formComponentService;
@@ -65,10 +68,14 @@ namespace FormVer2.Controllers
             ListItem = await _itemService.GetItems(formcomponentId);
             FormComponentDTO foco = new FormComponentDTO();
             foco = await _formComponentService.FindbyId(formcomponentId);
+            FormDTO form = new FormDTO();
+            form = await _formService.FindbyId(foco.FormId);
             ViewListItemDTO model = new ViewListItemDTO();
             model.ListItem = ListItem;
             model.FormId = foco.FormId;
             model.FormComponentId = formcomponentId;
+            model.ComponentName = await _componentService.ParseId(foco.ComponentId);
+            model.FormName = form.Title;
             return View(model);
         }
 
