@@ -1,7 +1,7 @@
 # FormCustom
 To run project, you need to complete the following steps:
 <br>
-<strong>Step 1:</strong> Restore FormCustomDB
+<strong>Step 1:</strong> Restore FormCustomDB (if your has installed SQL Server)
 <br>
 <strong>Step 2:</strong> Access Tools --> NuGet Package Manager --> Package Manager Console
 <br>
