@@ -1,7 +1,14 @@
 ﻿@using FormVer2.Models.BL.PreviewBL
-@model string
+@model PreviewComponentDTO
+@{
+    string str = Model.Alias;
+    if (@Model.IsRequired)
+    {
+        str = str + "*";
+    }
+}
 
 <div class="form-group">
-    <label class="control-label">@Model</label>
+    <label class="control-label">@str</label>
     <input class="form-control" />
 </div>

@@ -1,11 +1,35 @@
 @using FormVer2.Models.BL.PreviewBL
 @model PreviewComponentDTO
+@{
+    string str = Model.Alias;
+    if (@Model.IsRequired)
+    {
+        str = str + "*";
+    }
+}
 
 <div class="form-group">
-    <label>@Model.Alias</label>
+    <label>@str</label>
     <select class="form-control select2" style="width: 100%;">
-        <option>Select one</option>
         @{
+            int count = 0;
+
+            foreach (var item in Model.ListItem)
+            {
+                if (item.IsPreSelected)
+                {
+                    <option>@item.Alias</option>
+                    Model.ListItem.Remove(item);
+                    break;
+                }
+                count++;
+            }
+
+            if (count == Model.ListItem.Count())
+            {
+                <option>Select one</option>
+            }
+
             for (int i = 0; i < Model.ListItem.Count(); i++)
             {
                 <option>@Model.ListItem[i].Alias</option>

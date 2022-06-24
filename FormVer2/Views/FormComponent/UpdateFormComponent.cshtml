@@ -36,10 +36,13 @@
                             <div class="form-group">
                                 <label asp-for="ComponentId" class="control-label"></label>
                                 <select asp-for="ComponentId" class="form-control select2" style="width: 100%;">
-                                    <option>Select one</option>
-                                    @foreach (var co in ListCo)
-                                    {
-                                        <option>@co</option>
+                                    <option>@Model.ComponentId</option>
+                                    @{
+                                        ListCo.Remove(@Model.ComponentId);
+                                        foreach (var co in ListCo)
+                                        {
+                                            <option>@co</option>
+                                        }
                                     }
                                 </select>
                             </div>

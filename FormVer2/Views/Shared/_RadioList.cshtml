@@ -1,17 +1,33 @@
 @using FormVer2.Models.BL.PreviewBL
 @model PreviewComponentDTO
+@{
+    string str = Model.Alias;
+    if (@Model.IsRequired)
+    {
+        str = str + "*";
+    }
+}
 
 <div class="form-group clearfix">
-    <label>@Model.Alias</label>
+    <label>@str</label>
     <br />
     @{
         for (int i = 0; i < Model.ListItem.Count(); i++)
         {
             <div class="form-group clearfix">
-                <div class="icheck-primary d-inline">
-                    <input type="radio" id="@i.ToString()">
-                    <label for="@i.ToString()" style="font-weight: normal;">@Model.ListItem[i].Alias</label>
-                </div>
+                    <div class="icheck-primary d-inline">
+                        @{
+                            if (Model.ListItem[i].IsPreSelected)
+                            {
+                                <input type="radio" checked id="@i.ToString()">
+                            }
+                            else
+                            {
+                                <input type="radio" id="@i.ToString()">
+                            }
+                        }
+                        <label for="@i.ToString()" style="font-weight: normal;">@Model.ListItem[i].Alias</label>
+                    </div>
             </div>
         }
     }

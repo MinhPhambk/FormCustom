@@ -48,6 +48,7 @@ namespace FormVer2.Models.BL.PreviewBL
                     PreviewComponentDTO pr = new PreviewComponentDTO();
                     pr.DisplayOrder = c.DisplayOrder;
                     pr.Name = c.ComponentId.ToString();
+                    pr.IsRequired = c.IsRequired;
                     pr.Alias = c.TextPrompt;
                     pr.ContainValue = new bool();
                     pr.ListItem = new List<ItemDTO>();

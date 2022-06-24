@@ -100,6 +100,7 @@ namespace FormVer2.Controllers
             }
             FormComponentDTO formComponentDTO;
             formComponentDTO = await _formComponentService.FindbyId(id);
+            formComponentDTO.ComponentId = await _componentService.ParseId(formComponentDTO.ComponentId);
             return View(formComponentDTO);
         }
 

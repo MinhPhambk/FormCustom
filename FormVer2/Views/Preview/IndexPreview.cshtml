@@ -42,14 +42,7 @@
                     @foreach (var c in Model.ListComponent)
                     {
                         var str = "_" + c.Name;
-                        if (c.ContainValue)
-                        {
-                            Html.RenderPartial(str, c);
-                        }
-                        else
-                        {
-                            Html.RenderPartial(str, c.Alias);
-                        }
+                        Html.RenderPartial(str, c);
                     }
                 </div>
                 <!-- /.card-body -->

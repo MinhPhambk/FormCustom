@@ -57,7 +57,23 @@
                                 @Html.DisplayFor(modelItem => item.Alias)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.IsPreSelected)
+                                @{ if (item.IsPreSelected)
+                                    {
+                                        <div class="icheck-primary d-inline">
+                                            <input type="checkbox" id="checkboxPrimary1" checked disabled>
+                                            <label for="checkboxPrimary1">
+                                            </label>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="icheck-primary d-inline">
+                                            <input type="checkbox" id="checkboxPrimary1" disabled>
+                                            <label for="checkboxPrimary1">
+                                            </label>
+                                        </div>
+                                    }
+                                }
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.DisplayOrder)
