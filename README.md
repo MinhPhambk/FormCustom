@@ -1,5 +1,6 @@
 # FormCustom
-To run project, you need to complete the following steps:/n
+To run project, you need to complete the following steps:
+<br>
 Step 1: Restore FormCustomDB
 Step 2: Access Tools --> NuGet Package Manager --> Package Manager Console
 Step 3: Paste this to console:
